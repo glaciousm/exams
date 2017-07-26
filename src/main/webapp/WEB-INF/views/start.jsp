@@ -207,7 +207,7 @@
 				  <!-- <input id="settings" type="checkbox" name="settings" value="" onchange="changeEnable()" checked="checked"><label style="position: relative;vertical-align: middle;margin-left: 5px;">Change manually the chapters questions</label> -->
 			  </div>
 		  </div>
-		  <input id="submitBtn" class="btn btn-primary" type="submit" value="Start" style="position: absolute; bottom:10px; right:49%""/>
+		  <input id="submitBtn" class="btn btn-primary" type="submit" value="Start" style="position: absolute; bottom:10px; right:49%"/>
 		
 		</form>
 		</div>

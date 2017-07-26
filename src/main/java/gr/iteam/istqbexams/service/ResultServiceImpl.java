@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gr.iteam.istqbexams.dao.ResultDao;
 import gr.iteam.istqbexams.model.Result;
-import gr.iteam.istqbexams.security.ResultService;
 
 @Service("resultService")
 @Transactional
@@ -30,6 +29,11 @@ public class ResultServiceImpl implements ResultService {
 	@Override
 	public List<Result> list() {
 		return resultDao.list();
+	}
+
+	@Override
+	public List<Result> listByUser(int id) {
+		return resultDao.listByUser(id);
 	}
 
 }

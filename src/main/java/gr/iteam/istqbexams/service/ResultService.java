@@ -1,4 +1,4 @@
-package gr.iteam.istqbexams.security;
+package gr.iteam.istqbexams.service;
 
 import java.util.List;
 
@@ -11,5 +11,7 @@ public interface ResultService {
 	void save(Result result);
 
 	List<Result> list();
+	
+	List<Result> listByUser(int id);
 
 }

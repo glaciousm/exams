@@ -22,6 +22,7 @@
             	var choiseC = document.getElementsByClassName("choiseC");
             	var choiseD = document.getElementsByClassName("choiseD");
             	var choiseE = document.getElementsByClassName("choiseE");
+            	
             	if (choiseE[index] == null || typeof  choiseE[index] == 'undefined') {
 
             		if (choiseA[index].checked || choiseB[index].checked || choiseC[index].checked || choiseD[index].checked) {   
@@ -64,14 +65,10 @@
                 		   	}
             		
 				} else {
-					console.log(name==="choiseE");
-					console.log(index);
-					console.log(choiseE[index].checked);
 					if (choiseA[index].checked || choiseB[index].checked || choiseC[index].checked || choiseD[index].checked || choiseE[index].checked) {   
-						console.log(name==="choiseE");
+						
 	            		if ((choiseA[index].checked && choiseB[index].checked) || (choiseA[index].checked && choiseC[index].checked) || (choiseA[index].checked && choiseD[index].checked) || (choiseA[index].checked && choiseE[index].checked) || (choiseB[index].checked && choiseC[index].checked) || (choiseB[index].checked && choiseD[index].checked) || (choiseB[index].checked && choiseE[index].checked) || (choiseC[index].checked && choiseD[index].checked) || (choiseC[index].checked && choiseE[index].checked) || (choiseD[index].checked && choiseE[index].checked)){
     						button.disabled = true;
-    						console.log(name==="choiseE");
     						if (name==="choiseA") {
 								choiseB[index].checked = false;
 								choiseC[index].checked = false;
@@ -93,7 +90,6 @@
 								choiseA[index].checked = false;
 								choiseE[index].checked = false;
 							} else if(name==="choiseE"){
-								console.log(name==="choiseE");
 								choiseB[index].checked = false;
 								choiseC[index].checked = false;
 								choiseD[index].checked = false;
@@ -157,7 +153,7 @@
 		<div class="panel panel-default"  style="overflow:scroll; overflow-x:hidden; height:90%;width:100%">
 			  <!-- Default panel contents -->
 		  	<div class="panel-heading" style="position: absolute; width: 95.5%"><span class="lead">Random Test </span><div style ="float: right;"><font size ="4">Remaining Time : <span id="time" style="color: #03c103">60:00</span> minutes</font></div></div>		  	
-		  	<form:form id="myForm" method="POST" modelAttribute="random" action="/istqbExams/results" class="form-horizontal">			
+		  	<form:form id="myForm" method="POST" modelAttribute="random" action="/istqbExams/testresults" class="form-horizontal">			
 			<br>
 			<br>
 			<br>
@@ -172,13 +168,13 @@
 				<h4><form:checkbox name="selected" value="b" path="questionList[${loop.index}].selected" class="choiseB" onChange="changeColor(${loop.index}, 'choiseB')"/> <b>B.</b> ${questions.answerb}</h4>
 				<h4><form:checkbox name="selected" value="c" path="questionList[${loop.index}].selected" class="choiseC" onChange="changeColor(${loop.index}, 'choiseC')"/> <b>C.</b> ${questions.answerc}</h4>
 				<h4><form:checkbox name="selected" value="d" path="questionList[${loop.index}].selected" class="choiseD" onChange="changeColor(${loop.index}, 'choiseD')"/> <b>D.</b> ${questions.answerd}</h4>
-    			<c:if test="${not empty questions.answere}"><h4><form:checkbox name="selected" value="e" path="questionList[${loop.index}].selected" class="choiseE" onChange="changeColor(${loop.index}, 'choiseE')"/> <b>E.</b> ${questions.answere}</h4></c:if>
+    			<c:choose><c:when test="${not empty questions.answere}"><h4><form:checkbox name="selected" value="e" path="questionList[${loop.index}].selected" class="choiseE" onChange="changeColor(${loop.index}, 'choiseE')"/> <b>E.</b> ${questions.answere}</h4></c:when><c:otherwise><h4 style="display: none" ><form:checkbox name="selected" value="e" path="questionList[${loop.index}].selected" class="choiseE" onChange="changeColor(${loop.index}, 'choiseE')"/> <b>E.</b> ${questions.answere}</h4></c:otherwise></c:choose>
     			</div>
 			</c:forEach>
 			
 			<input type="submit" value="Submit" class="btn btn-primary btn-sm" id="submitButton"/>
 			</form:form>			
 		</div>		 	
-		<div><font size ="3">Remaining questions: <span id ="remainingQ" style="color: #e21802">0/40</span></font></div>
+		<div><font size ="3">Answered questions: <span id ="remainingQ" style="color: #e21802">0/40</span></font></div>
    	</div>
 </body>

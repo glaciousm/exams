@@ -103,9 +103,10 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="course">Course</label>
 					<div class="col-md-7">
+					${question.course}
 						<form:select path="course" style="text-transform: uppercase">
-							 <form:option value="${question.course}" />
-    						 <form:options items="${course}" />
+							<form:option value="${question.course}" />
+							<form:options items="${course}" />					 
 						</form:select>
 					</div>
 				</div>

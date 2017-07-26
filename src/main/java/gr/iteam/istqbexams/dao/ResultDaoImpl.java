@@ -1,8 +1,10 @@
 package gr.iteam.istqbexams.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -32,6 +34,17 @@ public class ResultDaoImpl extends AbstractDao<Integer, Result>  implements Resu
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Result> result = (List<Result>) criteria.list();
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Result> listByUser(int id) {
+		List<Result> list = new ArrayList<Result>();
+		Query query = getSession().createQuery(
+		        "from Result " + 
+				"where userId = '" + id + "'");
+		list = query.list();
+		return list;
 	}
 
 }

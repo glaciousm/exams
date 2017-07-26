@@ -11,4 +11,6 @@ public interface ResultDao {
 	void save(Result result);
 	
 	List<Result> list();
+	
+	List<Result> listByUser(int id);
 }

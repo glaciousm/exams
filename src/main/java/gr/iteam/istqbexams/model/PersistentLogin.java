@@ -14,6 +14,9 @@ import javax.persistence.TemporalType;
 @Table(name="PERSISTENT_LOGINS")
 public class PersistentLogin implements Serializable{
 
+	private static final long serialVersionUID = -1621724332381038067L;
+
+
 	@Id
 	private String series;
 

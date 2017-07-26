@@ -13,11 +13,26 @@
 </head>
 
 <body>
-	<div class="generic-container">
+	<div class="generic-container" style="height: 95%; width: 96%">
 		<%@include file="authheader.jsp" %>	
 		<div class="panel panel-default">
 			  <!-- Default panel contents -->
-		  	<div class="panel-heading"><span class="lead">Results So Far </span></div>
+		  	<div class="panel-heading">
+			  	<div  class="floatLeft" style="display: inline-block;">
+			  		<span class="lead">List of Results </span>
+			  	</div>
+			  	<div class="floatRight" style="width:30%;display: inline-block;background-color: red">
+			  		<form action="/istqbExams/usertestresults" method="get">
+			  			<select name="id" class="form-control" style="width:30%;display: inline-block;">
+							<c:forEach var="item" varStatus="loop" items="${userList}">
+	        					<option value="${item.id}">${item.firstName} ${item.lastName}</option>
+	   						 </c:forEach>
+					  </select>		
+					  <input id="submitBtn" class="btn btn-primary" type="submit" value="Search"/>
+			  		</form>
+			  	</div>
+		  	</div>
+		  	<div style="overflow:scroll; overflow-x:hidden; height: 85%;width:100%">
 			<table class="table table-hover">
 	    		<thead>
 		      		<tr>
@@ -37,6 +52,7 @@
 				</c:forEach>
 	    		</tbody>
 	    	</table>
+	    	</div>
 		</div>
    	</div>
 </body>

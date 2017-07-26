@@ -34,8 +34,8 @@ import gr.iteam.istqbexams.model.Question;
 import gr.iteam.istqbexams.model.Result;
 import gr.iteam.istqbexams.model.User;
 import gr.iteam.istqbexams.model.UserProfile;
-import gr.iteam.istqbexams.security.ResultService;
 import gr.iteam.istqbexams.service.QuestionService;
+import gr.iteam.istqbexams.service.ResultService;
 import gr.iteam.istqbexams.service.UserProfileService;
 import gr.iteam.istqbexams.service.UserService;
 import gr.iteam.istqbexams.util.Parser;
@@ -200,7 +200,7 @@ public class Home {
 		return "success";
 	}
 	
-	@RequestMapping(value = { "/results" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/testresults" }, method = RequestMethod.POST)
 	public String checkResults(Exam random, BindingResult result,
 			ModelMap model) {
 		if (isCurrentAuthenticationAnonymous()) {
@@ -234,11 +234,12 @@ public class Home {
 		results.setScore(score);
 		results.setUserId(user.getId());
 		resultService.save(results);
-		return "results";
+		return "testresults";
 	}
 	
 	@RequestMapping(value = { "/resultlist" }, method = RequestMethod.GET)
 	public String resultList(ModelMap model) {
+		List<User> userList = userService.findAllUsers();
 		if (isCurrentAuthenticationAnonymous()) {
 			return "login";
 		}
@@ -246,7 +247,24 @@ public class Home {
 		for (Result result : results) {
 			result.setUser(userService.findById(result.getUserId()).getFirstName() + " " + userService.findById(result.getUserId()).getLastName());
 		}
+		model.addAttribute("userList", userList);
 		model.addAttribute("results", results);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "resultlist";
+	}
+	
+	@RequestMapping(value = { "/usertestresults" }, method = RequestMethod.GET)
+	public String resultList(ModelMap model, @RequestParam int id) {
+		List<User> userList = userService.findAllUsers();
+		if (isCurrentAuthenticationAnonymous()) {
+			return "login";
+		}
+		List<Result> results = resultService.listByUser(id);
+		for (Result result : results) {
+			result.setUser(userService.findById(result.getUserId()).getFirstName() + " " + userService.findById(result.getUserId()).getLastName());
+		}
+		model.addAttribute("results", results);
+		model.addAttribute("userList", userList);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "resultlist";
 	}
